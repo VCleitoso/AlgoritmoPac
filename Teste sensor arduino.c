@@ -2,7 +2,7 @@
 #define echoPin A1
 //Arduino Uno
 
-//Temos que pegar isso daqui, criar funções e escrever testes.
+//Temos que pegar isso daqui, criar funções e escrever testes. Colocar biblioteca de testes.
 #include "SoftwareSerial.h"
 SoftwareSerial blackBoardSlave(A4,A5); // (RX, TX), Faz comunicação master com o esp, usar portas certas
 /* Usei software seial, pois achei mais fácil de entender.*/
