@@ -8,7 +8,7 @@ SoftwareSerial blackBoardSlave(A4,A5); // (RX, TX), Faz comunicação master com
 
 //Testes
 
-teste(duration) {
+test(duration) {
  asserNotNull(1,1);
 }
 
