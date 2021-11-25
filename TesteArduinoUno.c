@@ -1,20 +1,20 @@
 #define trigPin A0
 #define echoPin A1
-#include AUnit.h
+#include "AUnit.h"
 #include "SoftwareSerial.h"
 
-long duration;
+int duration;
 
-SoftwareSerial blackBoardSlave(A4,A5); // (RX, TX), Faz comunicação master com o esp, usar portas certas
-/* Usei software seial, pois achei mais fácil de entender.*/
+SoftwareSerial blackBoardSlave(A4,A5); 
+/* Usei software serial, pois achei mais fácil de entender.*/
 
-//Testes
+ //Testes;
 
-test(duration) {
- assertNotNull(1,1);
+test(NotNull) {
+ assertNotEqual(duration, 0);
 }
 
-long duration;
+
 
 void setup(){
   blackBoardSlave.begin(9600);
@@ -26,8 +26,9 @@ void setup(){
 }
 
 void loop() {
+aunit::TestRunner::run();
   
- void duration(trigPin,echoPin);
+duracao();
 
  blackBoardSlave.print(duration); //Envia variável duration pro esp
 
@@ -38,7 +39,7 @@ void loop() {
 }
 
 //Função para mandar a variável duration
-void duration(trigPin,echoPin){
+void duracao(){
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
   // Sets the trigPin on HIGH state for 10 micro seconds
@@ -46,5 +47,5 @@ void duration(trigPin,echoPin){
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
   duration = pulseIn(echoPin, HIGH);   
-  return duration;
+  long duration;
 }
