@@ -1,5 +1,6 @@
 #define trigPin A0
 #define echoPin A1
+//Arduino Uno
 
 //Temos que pegar isso daqui, criar funções e escrever testes.
 #include "SoftwareSerial.h"
