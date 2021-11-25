@@ -52,7 +52,7 @@ void loop() {
    Serial.print( duration );
   Serial.println(" duração");
     Serial.println("-------------");
- blackBoardSlave.print(Cm); //Envia variável Cm pro esp
+ blackBoardSlave.print(duration); //Envia variável duration pro esp
 
    
   
