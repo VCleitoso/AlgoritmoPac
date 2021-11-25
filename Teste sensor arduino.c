@@ -4,7 +4,8 @@
 
 //Temos que pegar isso daqui, criar funções e escrever testes.
 #include "SoftwareSerial.h"
-SoftwareSerial blackBoardSlave(0,1); // (RX, TX), Faz comunicação master com o esp, usar portas certas
+SoftwareSerial blackBoardSlave(A4,A5); // (RX, TX), Faz comunicação master com o esp, usar portas certas
+/* Usei software seial, pois achei mais fácil de entender.*/
 
 long duration;
 int Cm;
