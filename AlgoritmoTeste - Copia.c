@@ -12,7 +12,7 @@
 #include "Adafruit_MQTT.h"
 #include "Adafruit_MQTT_Client.h"
 #include "SoftwareSerial.h"
-//Tem que incluir biblioteca para testes
+
 // ======================================================================
 // --- Dados de Acesso do seu roteador ---
 #define WLAN_SSID       "12345678" // Informação da SSID do seu roteador
@@ -28,7 +28,7 @@
 #define trigPin 22  //D1 - PINO DE TRIGGER PARA SENSOR ULTRASSONICO
 #define echoPin 23  //D2 - PINO DE ECHO PARA SENSOR ULTRASSONICO
  
-WiFiClient client; // cria uma classe WiFiClient com o ESP8266 para conexão com o servidor MQTT
+WiFiClient client; // cria uma classe WiFiClient com o ESP32 para conexão com o servidor MQTT
  
 // Configura a classe MQTT passando para o WiFi cliente e Servidor MQTT os detalhes do login
 Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO_KEY);
@@ -77,16 +77,6 @@ void setup() {
 void loop() {
   MQTT_connect();   // chama função para conexão com MQTT server
    
-  /*digitalWrite(trigPin, LOW);    // Limpa trigPin
-  delayMicroseconds(2);          // aguarda 2 microsegundos
- 
-  digitalWrite(trigPin, HIGH);   // Seta trigPin HIGH aguarda 
-  delayMicroseconds(10);         // aguada 10 microsegundos
-  digitalWrite(trigPin, LOW);    // Seta trigPin LOW 
-   
-  // Leitura do echoPin, retorna a onda de som em microsegundos
-  duracao = pulseIn(echoPin, HIGH);
-  Vai receber variável distancia do arduino uno*/
   char duracao = blackBoardMaster.read(); //recebe duração do arduino uno
   distancia= duracao*0.034/2;
   distancia = distancia*10; // converter cm para mm
