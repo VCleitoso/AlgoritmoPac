@@ -6,6 +6,12 @@
 SoftwareSerial blackBoardSlave(A4,A5); // (RX, TX), Faz comunicação master com o esp, usar portas certas
 /* Usei software seial, pois achei mais fácil de entender.*/
 
+//Testes
+
+teste(duration) {
+ asserNotNull(1,1) 
+}
+
 long duration;
 
 void setup(){
