@@ -1,6 +1,5 @@
 #define trigPin A0
 #define echoPin A1
-#include AUnit.h
 #include "SoftwareSerial.h"
 
 SoftwareSerial blackBoardSlave(A4,A5); // (RX, TX), Faz comunicação master com o esp, usar portas certas
