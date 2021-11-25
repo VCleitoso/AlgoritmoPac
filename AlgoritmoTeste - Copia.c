@@ -1,6 +1,6 @@
 /* Programa para PAC II:
  * Monitor o volume na sua caixa d'água
- * Biblioteca da Placa: "esp8266 by ESP8266 Community versão 2.3.0"
+ * Biblioteca da Placa: "esp32 dev"
  * Placa: "NodeMCU 1.0 (ESP-12E Module)"
  * Upload Speed: "115200"
  * CPU Frequency: "160MHz"
@@ -37,7 +37,7 @@ Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO
 Adafruit_MQTT_Publish volume = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/volume");
 // ======================================================================
 // --- Confirguração Slave----
-SoftwareSerial blackBoardMaster(40,41); // (34, 35), usar portas certas.
+SoftwareSerial blackBoardMaster(34,35); // (RX, TX), usar portas certas.
 
 // ======================================================================
 // --- Variáveis Globais ---
