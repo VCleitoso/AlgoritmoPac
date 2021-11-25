@@ -36,11 +36,9 @@ Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO
 // O endereçamento para enviar os arquivos seguem o formato: <username>/feeds/<feedname>
 Adafruit_MQTT_Publish volume = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/volume");
 // ======================================================================
-// --- Confirguração Slave
-SoftwareSerial blackBoardMaster(40,41); // (RX, TX)
+// --- Confirguração Slave----
+SoftwareSerial blackBoardMaster(40,41); // (34, 35), usar portas certas.
 
-// ======================================================================
- 
 // ======================================================================
 // --- Variáveis Globais ---
 long duracao = 0;
