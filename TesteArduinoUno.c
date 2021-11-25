@@ -3,6 +3,8 @@
 #include AUnit.h
 #include "SoftwareSerial.h"
 
+long duration;
+
 SoftwareSerial blackBoardSlave(A4,A5); // (RX, TX), Faz comunicação master com o esp, usar portas certas
 /* Usei software seial, pois achei mais fácil de entender.*/
 
