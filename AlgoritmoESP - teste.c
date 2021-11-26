@@ -37,8 +37,9 @@ SoftwareSerial blackBoardMaster(34,35); // (RX, TX), usar portas certas.
 
 // ======================================================================
 // --- Variáveis Globais ---
-int duracao = 0;
-float distancia = 0;
+int duracao;
+float distancia;
+int volumevar;
 
 // ======================================================================
 //Testes
