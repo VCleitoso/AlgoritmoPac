@@ -37,19 +37,23 @@ SoftwareSerial blackBoardMaster(34,35); // (RX, TX), usar portas certas.
 
 // ======================================================================
 // --- Variáveis Globais ---
-int duracao = 0;
-float distancia = 0;
-int volumevar;
+float duracao;
+float distancia;
+float volumevar;
+int conectado = 0;
 // ======================================================================
-//Funções
+// --- Funções ---
+ void WifiConecta (){
+   WiFi.begin(WLAN_SSID, WLAN_PASS);
+   while (WiFi.status() != WL_CONNECTED) {
+     delay(500);
+     Serial.print(".");
+   }
+   Serial.println();
 
-float calculoDistancia(duracao){
-  duracao = blackBoardMaster.read(); //recebe duração do arduino uno
-  distancia= duracao*0.017175;
-  distancia = distancia*10; // converter cm para mm
-  return distancia;
-
-}
+   Serial.println("WiFi Conectado");
+   Serial.println("IP endereço: "); Serial.println(WiFi.localIP());
+ }
  void MQTT_connect() {
     int8_t ret;
    
@@ -73,81 +77,65 @@ float calculoDistancia(duracao){
     int conectado = 1;
     Serial.println("MQTT Conectado!"); // imprime na serial
   }
- void WifiConecta(){
-   WiFi.begin(WLAN_SSID, WLAN_PASS);
-   while (WiFi.status() != WL_CONNECTED) {
-     delay(500);
-     Serial.print(".");
-   }
-   Serial.println();
+void calculo() {
 
-   Serial.println("WiFi Conectado");
-   Serial.println("IP endereço: "); Serial.println(WiFi.localIP());
- }
-
-
-
-float distanciaMINMAX(distancia){
- if (distancia > 96){  // leitura minima. Reservatório vazio
+  duracao = blackBoardMaster.read();
+  distancia= duracao*0.01715;
+  distancia = distancia*10; // converter cm para mm
+ 
+  if (distancia > 96){  // leitura mínima. Reservatório vazio
     distancia = 96;
   }
     if (distancia < 37){  // leitura máxima. Reservatório vazio
     distancia = 37;
   }
- return distancia;
+  volumevar = map(distancia, 37, 96, 1000, 0); 
+  
 }
 
-void range(){ 
- int volumevar = map(distancia, 37, 96, 1000, 0); 
-  /* Remapeia o range de leitura
-   * Ao invés de ler de 37 a 96, lerá de 1000 a 0*/
-
-}
-
-void imprimevar(){
+ void publica () {
   Serial.print("distancia:"); // imprime "distancia:"
   Serial.println(distancia);  // imprime a variavel distancia
   Serial.print("volume:");    // imprime "volume:"
   Serial.println(volumevar);  // imprime a variavel volume
-
-}
-
-void publicarvar(){
- volume.publish(volumevar);     // publica variavel "distancia" em no feed "volume"
+   
+  volume.publish(volumevar);     // publica variável "distância" em no feed "volume"
   // nossa saída será em mL
-
-}
+   
+  delay(3000); // aguarda 3 segundos
+  /* Observação: A plataforma Adafruit IO só permite 30 publicações/minuto
+   * na conta gratuita. Então é importante não ultrapassar ou sua leitura 
+   * na dashboard será instável e incorreta.*/
+  
+ }
 
 // ======================================================================
 //Testes
-
-
-test(NotNull) {
- assertNotEqual(duracao, 0); 
- assertNotEqual(volumevar, distancia); 
-}
-
-test(dist){
- calculoDistancia(5822);
- assertEqual(distancia,99.99285);
-}
-test(leit.Min){
- assertEqual(distanciaMINMAX(98),96);
-}
-test(leit.Max){
- assertEqual(distanciaMINMAX(35),37);
-}
-test(MQTT){
- assertEqual(conectado,1);
-}
-//ver com o joe se isso pode ser feito, ou então coloca o teste no loop.
 
 test(wifi){
  WifiConecta();
  assertEqual(WiFi.status(),WL_CONNECTED);
 }
+test(MQTT){
+ WifiConecta();
+ MQTT_connect();
+ assertEqual(conectado,1);
+}
+test(calc){ 
+  float y;
 
-
+  y= 5822*0.01715;
+  y = y*10; // converter cm para mm
+ 
+  if (y > 96){  // leitura mínima. Reservatório vazio
+    y = 96;
+  }
+    if (y < 37){  // leitura máxima. Reservatório vazio
+    y = 37;
+  }
+float result=96;
+ assertEqual(y,result);
+}
 
 
 // ======================================================================
@@ -164,35 +152,24 @@ void setup() {
   Serial.println(WLAN_SSID);
  
   WifiConecta(); 
-
+}
    
 // ======================================================================
-// --- Configuração IO ---
-  pinMode(trigPin, OUTPUT); // pino D1 como saída para TRIGGER
-  pinMode(echoPin, INPUT);  // pino D2 como entrada para ECHO
-}
-// ======================================================================
+
+
 // --- void loop ---
 void loop() {
  aunit::TestRunner::run();
-  MQTT_connect();   // chama função para conexão com MQTT server
-   
-  calculoDistancia(duracao, distancia);
- 
-  distanciaMINMAX(distancia);
- 
-  range();
 
-  imprimevar();
-   
-  publicarvar();   
+  calculo();
+  publica();
+  
+  
+
  
-   
-  delay(3000); // aguarda 3 segundos
-  /* Observação: A plataforma Adafruit IO só permite 30 publicações/minuto
-   * na conta gratuita. Então é importante não ultrapassar ou sua leitura 
-   * na dashboard será instável e incorreta.*/
 }
+
  
 // ======================================================================
+
 // --- FIM ---
