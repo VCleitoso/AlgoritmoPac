@@ -42,78 +42,7 @@ float distancia;
 int volumevar;
 
 // ======================================================================
-//Testes
-
-test(NotNull) {
- assertNotEqual(duracao, 0); 
- assertNotEqual(volumevar, distancia); 
-}
-
-test(dist){
- assertEqual(calculoDistancia(5822),99.99285);
-}
-test(leit.Min){
- assertEqual(distanciaMINMAX(98),96);
-}
-test(leit.Max){
- assertEqual(distanciaMINMAX(35),37);
-}
-test(MQTT){
- assertEqual(conectado,1);
-}
-//ver com o joe se isso pode ser feito, ou então coloca o teste no loop.
-
-test(wifi){
- WifiConecta();
- assertEqual(WiFi.status(),WL_CONNECTED);
-}
-
-
-
-
-// ======================================================================
-// --- Void Setup ---
-void setup() {
-  blackBoardMaster.begin(9600);
-  Serial.begin(9600); // inicia comunicação serial com velocidade 9600
-
-   
-  Serial.println(F("Monitorar Volume Caixa D'agua - Adafruit MQTT")); // escreve na serial   
-  // Conecta ao ponto de acesso WiFi
-  Serial.println(); Serial.println();
-  Serial.print("Conectando ao ");
-  Serial.println(WLAN_SSID);
- 
-  WifiConecta(); 
-}
-   
-// ======================================================================
-
-
-// --- void loop ---
-void loop() {
- aunit::TestRunner::run();
-  MQTT_connect();   // chama função para conexão com MQTT server
-   
-  calculoDistancia(duracao, distancia);
- 
-  distanciaMINMAX(distancia);
- 
-  range();
-
-  imprimevar();
-   
-  publicarvar();   
- 
-   
-  delay(3000); // aguarda 3 segundos
-  /* Observação: A plataforma Adafruit IO só permite 30 publicações/minuto
-   * na conta gratuita. Então é importante não ultrapassar ou sua leitura 
-   * na dashboard será instável e incorreta.*/
-}
- 
-// ======================================================================
-// --- Função para Conexão / Reconexão MQTT ---
+// --- Funções ---
   void MQTT_connect() {
     int8_t ret;
    
@@ -190,4 +119,76 @@ void publicarvar (){
 
 
 // ======================================================================
+//Testes
+
+test(NotNull) {
+ assertNotEqual(duracao, 0); 
+ assertNotEqual(volumevar, distancia); 
+}
+
+test(dist){
+ assertEqual(calculoDistancia(5822),99.99285);
+}
+test(leit.Min){
+ assertEqual(distanciaMINMAX(98),96);
+}
+test(leit.Max){
+ assertEqual(distanciaMINMAX(35),37);
+}
+test(MQTT){
+ assertEqual(conectado,1);
+}
+.
+
+test(wifi){
+ WifiConecta();
+ assertEqual(WiFi.status(),WL_CONNECTED);
+}
+
+
+
+
+// ======================================================================
+// --- Void Setup ---
+void setup() {
+  blackBoardMaster.begin(9600);
+  Serial.begin(9600); // inicia comunicação serial com velocidade 9600
+
+   
+  Serial.println(F("Monitorar Volume Caixa D'agua - Adafruit MQTT")); // escreve na serial   
+  // Conecta ao ponto de acesso WiFi
+  Serial.println(); Serial.println();
+  Serial.print("Conectando ao ");
+  Serial.println(WLAN_SSID);
+ 
+  WifiConecta(); 
+}
+   
+// ======================================================================
+
+
+// --- void loop ---
+void loop() {
+ aunit::TestRunner::run();
+  MQTT_connect();   // chama função para conexão com MQTT server
+   
+  calculoDistancia(duracao, distancia);
+ 
+  distanciaMINMAX(distancia);
+ 
+  range();
+
+  imprimevar();
+   
+  publicarvar();   
+ 
+   
+  delay(3000); // aguarda 3 segundos
+  /* Observação: A plataforma Adafruit IO só permite 30 publicações/minuto
+   * na conta gratuita. Então é importante não ultrapassar ou sua leitura 
+   * na dashboard será instável e incorreta.*/
+}
+ 
+// ======================================================================
+
 // --- FIM ---
