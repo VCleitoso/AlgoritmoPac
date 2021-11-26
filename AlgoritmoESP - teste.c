@@ -1,8 +1,7 @@
 /* Programa para PAC II:
  * Monitor o volume na sua caixa d'água
  * Biblioteca da Placa: "esp32 dev"
- * Placa: "NodeMCU 1.0 (ESP-12E Module)"
- * Upload Speed: "115200"
+ * Upload Speed: "9600"
  * CPU Frequency: "160MHz"
  * //https://dl.espressif.com/dl/package_esp32_index.json
 */
