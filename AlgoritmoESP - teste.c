@@ -23,10 +23,7 @@
 #define AIO_USERNAME    "marcelomoresco"        // sua informação
 #define AIO_KEY         "projeto-pac" // sua informação
 // ======================================================================
-// --- Mapeamento de Hardware ---
-#define trigPin 22  //D1 - PINO DE TRIGGER PARA SENSOR ULTRASSONICO
-#define echoPin 23  //D2 - PINO DE ECHO PARA SENSOR ULTRASSONICO
- 
+// --- Mapeamento de Hardware --- 
 WiFiClient client; // cria uma classe WiFiClient com o ESP32 para conexão com o servidor MQTT
  
 // Configura a classe MQTT passando para o WiFi cliente e Servidor MQTT os detalhes do login
@@ -63,6 +60,8 @@ test(leit.Max){
 teste(MQTT){
  assertEqual(conectado,1);
 }
+//ver com o joe se isso pode ser feito, ou então coloca o teste no loop.
+ WifiConecta();
 teste(wifi){
  assertEqual(WiFi.status(),WL_CONNECTED);
 }
@@ -83,7 +82,7 @@ void setup() {
   Serial.print("Conectando ao ");
   Serial.println(WLAN_SSID);
  
-  WifiConecta();
+ 
 
    
 // ======================================================================
