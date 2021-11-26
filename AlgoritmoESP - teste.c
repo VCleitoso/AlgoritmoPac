@@ -57,12 +57,12 @@ test(leit.Min){
 test(leit.Max){
  assertEqual(distanciaMINMAX(35),37);
 }
-teste(MQTT){
+test(MQTT){
  assertEqual(conectado,1);
 }
 //ver com o joe se isso pode ser feito, ou então coloca o teste no loop.
 
-teste(wifi){
+test(wifi){
  WifiConecta();
  assertEqual(WiFi.status(),WL_CONNECTED);
 }
