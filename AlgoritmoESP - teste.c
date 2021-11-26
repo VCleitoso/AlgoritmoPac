@@ -20,8 +20,8 @@
 // --- Dados de Acesso da Plataforma Adafruit IO ---
 #define AIO_SERVER      "io.adafruit.com"     // manter fixo
 #define AIO_SERVERPORT  1883                  // manter fixo
-#define AIO_USERNAME    "marcelomoresco"        // sua informação
-#define AIO_KEY         "projeto-pac" // sua informação
+#define AIO_USERNAME    "vcleitoso"        // sua informação
+#define AIO_KEY         "aio_zJmJ397OfZxIvm5t3LNgAIi22JpT" // sua informação
 // ======================================================================
 // --- Mapeamento de Hardware --- 
 WiFiClient client; // cria uma classe WiFiClient com o ESP32 para conexão com o servidor MQTT
