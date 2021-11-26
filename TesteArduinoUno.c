@@ -31,6 +31,7 @@ aunit::TestRunner::run();
 duracao();
 
  blackBoardSlave.print(duration); //Envia variável duration pro esp
+ Serial.println(duration);
 
    
   
@@ -47,5 +48,5 @@ void duracao(){
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
   duration = pulseIn(echoPin, HIGH);   
-  long duration;
+  int duration;
 }
