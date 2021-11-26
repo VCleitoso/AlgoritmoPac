@@ -61,8 +61,9 @@ teste(MQTT){
  assertEqual(conectado,1);
 }
 //ver com o joe se isso pode ser feito, ou então coloca o teste no loop.
- WifiConecta();
+
 teste(wifi){
+ WifiConecta();
  assertEqual(WiFi.status(),WL_CONNECTED);
 }
 
@@ -82,7 +83,7 @@ void setup() {
   Serial.print("Conectando ao ");
   Serial.println(WLAN_SSID);
  
- 
+  WifiConecta(); 
 
    
 // ======================================================================
