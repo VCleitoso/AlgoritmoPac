@@ -1,3 +1,5 @@
+
+
 /* Programa para PAC II:
  * Monitor o volume na sua caixa d'água
  * Biblioteca da Placa: "esp32 dev"
@@ -78,23 +80,19 @@ int volumevar;
    Serial.println("IP endereço: "); Serial.println(WiFi.localIP());
  }
 
-float calculoDistancia (duracao){
+void calculoDistancia (){
   duracao = blackBoardMaster.read(); //recebe duração do arduino uno
   distancia= duracao*0.017175;
   distancia = distancia*10; // converter cm para mm
-  return distancia;
-
-}
-
-float distanciaMINMAX (distancia){
- if (distancia > 96){  // leitura minima. Reservatório vazio
+   if (distancia > 96){  // leitura minima. Reservatório vazio
     distancia = 96;
   }
     if (distancia < 37){  // leitura máxima. Reservatório vazio
     distancia = 37;
   }
- return distancia;
+
 }
+
 
 void range (){ 
  int volumevar = map(distancia, 37, 96, 1000, 0); 
