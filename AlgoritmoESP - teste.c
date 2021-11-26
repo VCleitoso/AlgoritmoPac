@@ -87,11 +87,8 @@ void setup() {
 
    
 // ======================================================================
-// --- Configuração IO ---
-  pinMode(trigPin, OUTPUT); // pino D1 como saída para TRIGGER
-  pinMode(echoPin, INPUT);  // pino D2 como entrada para ECHO
-}
-// ======================================================================
+
+
 // --- void loop ---
 void loop() {
  aunit::TestRunner::run();
